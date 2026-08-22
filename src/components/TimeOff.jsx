@@ -1,36 +1,65 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function TimeOff() {
   const [leaveType, setLeaveType] = useState('Paid');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [remarks, setRemarks] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // Mock data for existing leave requests
-  const [requests, setRequests] = useState([
-    { id: 1, type: 'Sick', start: 'Aug 10, 2026', end: 'Aug 11, 2026', status: 'Approved', remarks: 'Fever' },
-    { id: 2, type: 'Paid', start: 'Jul 01, 2026', end: 'Jul 05, 2026', status: 'Approved', remarks: 'Family vacation' },
-  ]);
+  // Leave requests state fetched from backend
+  const [requests, setRequests] = useState([]);
 
-  const handleSubmit = (e) => {
+  // Fetch existing requests on load
+  useEffect(() => {
+    fetch('http://localhost:5000/api/leaves')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setRequests(data);
+        }
+      })
+      .catch(err => console.error('Error fetching leaves:', err));
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const newRequest = {
-      id: requests.length + 1,
-      type: leaveType,
-      start: startDate || 'Pending Date',
-      end: endDate || 'Pending Date',
-      status: 'Pending',
-      remarks: remarks || 'None'
+      userId: '60c72b2f9b1d8b2d88f3e211',
+      name: 'Likhitha R V', // Fixed with proper string quotes
+      leaveType,
+      startDate: startDate || 'Pending Date',
+      endDate: endDate || 'Pending Date',
+      remarks: remarks || 'None',
+      status: 'Pending'
     };
     
-    // Add the new request to the top of the list
-    setRequests([newRequest, ...requests]);
-    
-    // Reset form
-    setStartDate('');
-    setEndDate('');
-    setRemarks('');
-    alert("Leave request submitted successfully!");
+    try {
+      const response = await fetch('http://localhost:5000/api/leaves', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newRequest)
+      });
+
+      if (response.ok) {
+        const savedData = await response.json();
+        setRequests([savedData.leave || newRequest, ...requests]);
+        
+        setStartDate('');
+        setEndDate('');
+        setRemarks('');
+        alert("Leave request submitted successfully to MongoDB!");
+      } else {
+        alert("Failed to submit leave request.");
+      }
+    } catch (err) {
+      console.error('Network error:', err);
+      alert("Network error: Is your backend server running?");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -91,9 +120,10 @@ export default function TimeOff() {
           <div className="md:col-span-2 text-right">
             <button 
               type="submit"
+              disabled={loading}
               className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md transition-colors"
             >
-              Submit Request
+              {loading ? 'Submitting...' : 'Submit Request'}
             </button>
           </div>
         </form>
@@ -114,9 +144,9 @@ export default function TimeOff() {
             </thead>
             <tbody>
               {requests.map((req) => (
-                <tr key={req.id} className="border-b border-slate-100 hover:bg-slate-50">
-                  <td className="p-4 font-medium text-slate-800">{req.type}</td>
-                  <td className="p-4 text-slate-600">{req.start} to {req.end}</td>
+                <tr key={req._id || req.id} className="border-b border-slate-100 hover:bg-slate-50">
+                  <td className="p-4 font-medium text-slate-800">{req.leaveType || req.type}</td>
+                  <td className="p-4 text-slate-600">{req.startDate || req.start} to {req.endDate || req.end}</td>
                   <td className="p-4 text-slate-600 truncate max-w-xs">{req.remarks}</td>
                   <td className="p-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${
@@ -129,6 +159,11 @@ export default function TimeOff() {
                   </td>
                 </tr>
               ))}
+              {requests.length === 0 && (
+                <tr>
+                  <td colSpan="4" className="p-4 text-center text-slate-500">No leave requests found.</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
