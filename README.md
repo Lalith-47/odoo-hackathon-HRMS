@@ -1,77 +1,81 @@
 # Dayflow — Human Resource Management System
 
-Every workday, perfectly aligned.
+*Every workday, perfectly aligned.*
 
 ## Overview
 
-Dayflow is an HRMS built to digitize core HR operations — employee onboarding,
-profile management, attendance tracking, leave management, payroll visibility,
-and approval workflows for admins and HR officers.
+Dayflow is a full-stack HRMS built to digitize core HR operations — employee onboarding, profile management, attendance tracking, leave management, and live admin approval workflows for the Odoo Hackathon.
 
 ## Team
 
-- Lalith — Team Leader
-- Likhitha — Team Member
-- Aditya — Team Member
+*   **Lalith** — Team Leader
+*   **Likhitha R V** — Team Member
+*   **Adithya** — Team Member
 
 ## Tech Stack
 
-- Frontend: React (Vite) + Tailwind CSS
-- Backend: Node.js + Express.js + MongoDB
-- Version Control: Git + GitHub
+*   **Frontend:** React (Vite) + Tailwind CSS
+*   **Backend:** Node.js + Express.js + MongoDB
+*   **Version Control:** Git & GitHub
 
 ## Features
 
 ### Authentication & Authorization
-- [x] Sign up / Sign in UI with role-based toggle
-- [x] Auto-generated Login ID logic on registration
-- [ ] Backend: User registration, password hashing, and login API
+*   ✅ Sign up / Sign in UI with role-based toggle
+*   ✅ Auto-generated Login ID logic on registration
+*   ✅ Backend: User registration, password hashing, and login API
 
 ### Dashboard & Profile
-- [x] Employee & Admin dynamic routing based on role
-- [x] Employee Profile UI (Personal, Job, Salary details)
-- [ ] Backend: Fetch user profile data
+*   ✅ Employee & Admin dynamic routing based on role
+*   ✅ Employee Profile UI (Personal, Job, Salary details)
+*   ✅ Backend: Fetch user profile data
 
 ### Attendance Management
-- [x] Daily/weekly attendance view UI
-- [x] Check-in / Check-out toggle functionality
-- [ ] Backend: Store and fetch attendance timestamps
+*   ✅ Daily/weekly attendance view UI
+*   ✅ Check-in / Check-out toggle functionality
+*   ✅ Backend: Store and fetch attendance timestamps
 
 ### Leave & Time-Off Management
-- [x] Apply for leave form (Paid, Sick, Unpaid)
-- [x] Admin approval/rejection control panel UI
-- [ ] Backend: Leave request submission and status update API
+*   ✅ Apply for leave form (Paid, Sick, Unpaid)
+*   ✅ Admin approval/rejection control panel UI
+*   ✅ Backend: Leave request submission and status update API
 
 ### Payroll/Salary Management
-- [x] Read-only payroll view integrated into Employee Profile
-- [ ] Backend: Admin control over salary structure and payroll accuracy
+*   ✅ Read-only payroll view integrated into Employee Profile
+*   ✅ Backend: Admin control over salary structure and accuracy
 
 ## Getting Started
 
-To run the frontend client locally:
-\`\`\`bash
+To run the full-stack application locally:
+
+### 1. Start the Backend
+```bash
+cd backend
 npm install
 npm run dev
-\`\`\`
-
-## Project Structure
-
-\`\`\`text
+`````
+### 2. Start the Frontend (In a separate terminal)
+```Bash
+npm install
+npm run dev
+````
+### Project Structure
+```text
 odoo-hackathon-HRMS/
+├── backend/
+│   ├── models.js
+│   ├── server.js
+│   └── package.json
 ├── src/
+│   ├── assets/
 │   ├── components/
 │   │   ├── AdminView.jsx
 │   │   ├── Attendance.jsx
 │   │   ├── Profile.jsx
-│   │   ├── SignIn.jsx
+│   │   ├── Signin.jsx
 │   │   └── TimeOff.jsx
 │   ├── pages/
 │   │   └── Dashboard.jsx
-│   └── App.jsx
-├── public/
+│   ├── App.jsx
+│   └── index.css
 └── README.md
-\`\`\`
-
-## License
-
-Built for Odoo Hackathon x NMIT Bangalore — 2026
