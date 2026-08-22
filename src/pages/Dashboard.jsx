@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Attendance from '../components/Attendance';
+import TimeOff from '../components/TimeOff';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -23,18 +24,23 @@ export default function Dashboard() {
           <ul className="space-y-3 font-medium">
             <li 
               onClick={() => setActiveView('overview')}
-              className={`p-3 rounded-lg cursor-pointer transition ${activeView === 'overview' ? 'bg-purple-700 shadow-sm' : 'hover:bg-slate-800'}`}
+              className={`p-3 rounded-lg cursor-pointer transition ${activeView === 'overview' ? 'bg-purple-700 shadow-sm text-white' : 'hover:bg-slate-800 text-slate-400'}`}
             >
               Dashboard
             </li>
             <li className="p-3 hover:bg-slate-800 rounded-lg cursor-pointer transition text-slate-400">Profile</li>
             <li 
               onClick={() => setActiveView('attendance')}
-              className={`p-3 rounded-lg cursor-pointer transition ${activeView === 'attendance' ? 'bg-purple-700 shadow-sm' : 'hover:bg-slate-800'}`}
+              className={`p-3 rounded-lg cursor-pointer transition ${activeView === 'attendance' ? 'bg-purple-700 shadow-sm text-white' : 'hover:bg-slate-800 text-slate-400'}`}
             >
               Attendance
             </li>
-            <li className="p-3 hover:bg-slate-800 rounded-lg cursor-pointer transition text-slate-400">Time Off</li>
+            <li 
+              onClick={() => setActiveView('timeoff')}
+              className={`p-3 rounded-lg cursor-pointer transition ${activeView === 'timeoff' ? 'bg-purple-700 shadow-sm text-white' : 'hover:bg-slate-800 text-slate-400'}`}
+            >
+              Time Off
+            </li>
           </ul>
         </div>
         <div className="p-6">
@@ -70,7 +76,10 @@ export default function Dashboard() {
               <p className="text-sm text-slate-500">Check-in, check-out, and view daily records.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-400 cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all">
+            <div 
+              onClick={() => setActiveView('timeoff')}
+              className="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-400 cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all"
+            >
               <h3 className="text-xl font-bold text-slate-800 mb-2">Leave Requests</h3>
               <p className="text-sm text-slate-500">Apply for time off and track approval status.</p>
             </div>
@@ -78,6 +87,7 @@ export default function Dashboard() {
         )}
 
         {activeView === 'attendance' && <Attendance />}
+        {activeView === 'timeoff' && <TimeOff />}
         
       </div>
     </div>
