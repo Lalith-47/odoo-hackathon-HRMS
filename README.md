@@ -1,72 +1,16 @@
-# Dayflow — Human Resource Management System
+# React + Vite
 
-Every workday, perfectly aligned.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Overview
+Currently, two official plugins are available:
 
-Dayflow is an HRMS built to digitize core HR operations — employee onboarding,
-profile management, attendance tracking, leave management, payroll visibility,
-and approval workflows for admins and HR officers.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Team
+## React Compiler
 
-- Lalith — Team Leader
-- Likhitha — Team Member
-- Aditya — Team Member
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Tech Stack
+## Expanding the ESLint configuration
 
-- Frontend: React (Vite) + Tailwind CSS
-- Backend: TBD
-- Version Control: Git + GitHub
-
-## Features
-
-### Authentication & Authorization
-- Sign up / Sign in with role-based access (Admin / HR Officer / Employee)
-- Auto-generated Login ID on registration
-
-### Dashboard
-- Employee: quick-access cards for Profile, Attendance, Time Off
-- Admin/HR: employee list, attendance records, leave approvals
-
-### Employee Profile Management
-- View personal, job, salary, and document details
-- Edit limited fields (employee) / full edit access (admin)
-
-### Attendance Management
-- Daily/weekly attendance view
-- Check-in / Check-out
-- Status tracking: Present, Absent, Half-day, Leave
-
-### Leave & Time-Off Management
-- Apply for leave (Paid, Sick, Unpaid)
-- Approve/reject workflow for Admin/HR
-- Status tracking: Pending, Approved, Rejected
-
-### Payroll/Salary Management
-- Read-only payroll view for employees
-- Admin control over salary structure and payroll accuracy
-
-## Getting Started
-
-\`\`\`bash
-npm install
-npm run dev
-\`\`\`
-
-## Project Structure
-
-\`\`\`
-odoo-hackathon-HRMS/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── App.jsx
-├── public/
-└── README.md
-\`\`\`
-
-## License
-
-Built for Odoo Hackathon x NMIT Bangalore — 2026
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
