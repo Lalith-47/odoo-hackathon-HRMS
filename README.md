@@ -17,39 +17,38 @@ and approval workflows for admins and HR officers.
 ## Tech Stack
 
 - Frontend: React (Vite) + Tailwind CSS
-- Backend: TBD
+- Backend: Node.js + Express.js + MongoDB
 - Version Control: Git + GitHub
 
 ## Features
 
 ### Authentication & Authorization
-- Sign up / Sign in with role-based access (Admin / HR Officer / Employee)
-- Auto-generated Login ID on registration
+- [x] Sign up / Sign in UI with role-based toggle
+- [x] Auto-generated Login ID logic on registration
+- [ ] Backend: User registration, password hashing, and login API
 
-### Dashboard
-- Employee: quick-access cards for Profile, Attendance, Time Off
-- Admin/HR: employee list, attendance records, leave approvals
-
-### Employee Profile Management
-- View personal, job, salary, and document details
-- Edit limited fields (employee) / full edit access (admin)
+### Dashboard & Profile
+- [x] Employee & Admin dynamic routing based on role
+- [x] Employee Profile UI (Personal, Job, Salary details)
+- [ ] Backend: Fetch user profile data
 
 ### Attendance Management
-- Daily/weekly attendance view
-- Check-in / Check-out
-- Status tracking: Present, Absent, Half-day, Leave
+- [x] Daily/weekly attendance view UI
+- [x] Check-in / Check-out toggle functionality
+- [ ] Backend: Store and fetch attendance timestamps
 
 ### Leave & Time-Off Management
-- Apply for leave (Paid, Sick, Unpaid)
-- Approve/reject workflow for Admin/HR
-- Status tracking: Pending, Approved, Rejected
+- [x] Apply for leave form (Paid, Sick, Unpaid)
+- [x] Admin approval/rejection control panel UI
+- [ ] Backend: Leave request submission and status update API
 
 ### Payroll/Salary Management
-- Read-only payroll view for employees
-- Admin control over salary structure and payroll accuracy
+- [x] Read-only payroll view integrated into Employee Profile
+- [ ] Backend: Admin control over salary structure and payroll accuracy
 
 ## Getting Started
 
+To run the frontend client locally:
 \`\`\`bash
 npm install
 npm run dev
@@ -57,11 +56,17 @@ npm run dev
 
 ## Project Structure
 
-\`\`\`
+\`\`\`text
 odoo-hackathon-HRMS/
 ├── src/
 │   ├── components/
+│   │   ├── AdminView.jsx
+│   │   ├── Attendance.jsx
+│   │   ├── Profile.jsx
+│   │   ├── SignIn.jsx
+│   │   └── TimeOff.jsx
 │   ├── pages/
+│   │   └── Dashboard.jsx
 │   └── App.jsx
 ├── public/
 └── README.md
